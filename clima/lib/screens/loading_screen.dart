@@ -14,6 +14,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   double latitude;
   double longitude;
 
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
+
   void getLocation() async {
     // Getting User Location
     Location location = Location();
@@ -26,15 +32,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   //Get Data from the Internet
   void getData() async {
-    http.Response response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$WEATHER_API'));
+    http.Response response = await http.get(
+      Uri.parse(
+          'https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API}'),
+    );
     if (response.statusCode == 200) {
       String data = response.body;
       var decodedData = jsonDecode(data); // the jason data to be decodede
 
-      double temperature = decodedData['main']['temp'];
-      int condition = decodedData['weather'][0]['id'];
-      String cityName = decodedData['name'];
+      var temperature = decodedData['main']['temp'];
+      var condition = decodedData['weather'][0]['id'];
+      var cityName = decodedData['name'];
 
       print(temperature);
       print(condition);
@@ -45,23 +53,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getLocation();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            //Get the current location
-            getLocation();
-          },
-          child: Text('Get Location'),
-        ),
-      ),
-    );
+        // body: Center(
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       //Get the current location
+        //       getLocation();
+        //     },
+        //     child: Text('Get Location'),
+        //   ),
+        // ),
+        );
   }
 }
