@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const WEATHER_API = '4e643bedd1aed61228c24b696deaa80a';
+
 const kTempTextStyle = TextStyle(
   fontFamily: 'Spartan MB',
   fontSize: 100.0,
