@@ -27,7 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     latitude = location.latitude;
     longitude = location.longitude;
     NetworkHelper networkHelper = NetworkHelper(
-        'https://api.openweathermap.org/data/2.5/weather?lat=5.6270&lon=-0.3125&appid=${WEATHER_API}&units=metric');
+        'https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API}&units=metric');
 
     var weatherData = await networkHelper.getData();
     // print(weatherData);
