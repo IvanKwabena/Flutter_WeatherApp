@@ -1,6 +1,7 @@
 import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LocationScreen extends StatefulWidget {
   final weatherData;
@@ -20,17 +21,32 @@ class _LocationScreenState extends State<LocationScreen> {
   void initState() {
     super.initState();
     updateUI(widget.weatherData);
+    print(widget.weatherData);
     // print(widget.weatherData);
   }
 
   void updateUI(dynamic data) {
     setState(() {
-      double temp = data['main']['temp'];
-      temperature = temp.round();
-      var condition = data['weather'][0]['id'];
-      weatherIcon = weatherModel.getWeatherIcon(condition);
-      cityName = data['name'];
-      weatherMessage = weatherModel.getMessage(temperature);
+      try {
+        double temp = data['main']['temp'];
+        temperature = temp.round();
+        var condition = data['weather'][0]['id'];
+        weatherIcon = weatherModel.getWeatherIcon(condition);
+        cityName = data['name'];
+        weatherMessage = weatherModel.getMessage(temperature);
+      } catch (e) {
+        if (data == 401 || data == null) {
+          temperature = 0;
+          weatherIcon = 'Error';
+          weatherMessage = 'Something';
+          cityName = ' ';
+          // Alert(
+          //   context: context,
+          //   title: 'ERROR!',
+          //   desc: 'NO CONNECTION',
+          // ).show();
+        }
+      }
     });
   }
 
