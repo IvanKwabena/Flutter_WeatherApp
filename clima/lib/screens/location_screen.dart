@@ -9,19 +9,20 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  double temperature;
+  int temperature;
   String condition;
   String cityName;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     updateUI(widget.weatherData);
+    // print(widget.weatherData);
   }
 
   void updateUI(dynamic data) {
-    temperature = data['main']['temp'];
+    double temp = data['main']['temp'];
+    temperature = temp.round();
     condition = data['weather'][0]['description'];
     cityName = data['name'];
   }
