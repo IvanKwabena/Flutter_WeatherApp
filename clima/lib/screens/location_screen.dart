@@ -40,14 +40,17 @@ class _LocationScreenState extends State<LocationScreen> {
           weatherIcon = 'Error';
           weatherMessage = 'Something';
           cityName = ' ';
-          // Alert(
-          //   context: context,
-          //   title: 'ERROR!',
-          //   desc: 'NO CONNECTION',
-          // ).show();
         }
       }
     });
+  }
+
+  void alertMessage() {
+    Alert(
+      context: context,
+      title: 'ERROR!',
+      desc: 'NO CONNECTION',
+    ).show();
   }
 
   @override
@@ -76,6 +79,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       var weatherLocationData =
                           await weatherModel.getWeatherLocation();
                       updateUI(weatherLocationData);
+                      if (widget.weatherData == null) {
+                        alertMessage();
+                      }
                     },
                     child: Icon(
                       Icons.near_me,
