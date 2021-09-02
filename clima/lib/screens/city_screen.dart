@@ -37,6 +37,9 @@ class _CityScreenState extends State<CityScreen> {
                   cursorColor: Colors.white,
                   cursorHeight: 28.0,
                   enableSuggestions: true,
+                  onChanged: (value) {
+                    print(value);
+                  },
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25.0,
