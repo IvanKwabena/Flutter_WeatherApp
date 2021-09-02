@@ -98,6 +98,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           builder: (context) => CityScreen(),
                         ),
                       );
+                      if (typedName != null) {}
                     },
                     child: Icon(
                       Icons.location_city,
