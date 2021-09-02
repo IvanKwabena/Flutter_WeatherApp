@@ -33,7 +33,29 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(
+                  cursorColor: Colors.white,
+                  cursorHeight: 28.0,
+                  enableSuggestions: true,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25.0,
+                  ),
+                  enabled: true,
+                  decoration: InputDecoration(
+                    // icon: Icon(Icons.location_city),
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Enter City Name',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {},
