@@ -1,3 +1,4 @@
+import 'package:clima/screens/location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 
@@ -7,6 +8,8 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+  String cityName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +41,8 @@ class _CityScreenState extends State<CityScreen> {
                   cursorHeight: 28.0,
                   enableSuggestions: true,
                   onChanged: (value) {
-                    print(value);
+                    cityName = value;
+                    Navigator.pop(context, cityName);
                   },
                   style: TextStyle(
                     color: Colors.black,
