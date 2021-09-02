@@ -41,6 +41,7 @@ class _LocationScreenState extends State<LocationScreen> {
           // weatherMessage = 'Something';
           // cityName = ' ';
           // print('error');
+
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => ErrorPage()));
         }
@@ -89,8 +90,9 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                      // Receiving data backwards
+                      var typedName = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => CityScreen(),
