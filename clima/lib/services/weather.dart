@@ -6,6 +6,8 @@ class WeatherModel {
   double latitude;
   double longitude;
 
+  void getCityWeather() {}
+
   Future<dynamic> getWeatherLocation() async {
     Location location = Location();
     await location.getCurrentLocation();
