@@ -12,8 +12,7 @@ class WeatherModel {
     latitude = location.latitude;
     longitude = location.longitude;
     NetworkHelper networkHelper = NetworkHelper(
-        'https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API}&units=metric');
-
+        'https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=040f769082c8d2949babff0779052768&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }

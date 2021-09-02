@@ -1,7 +1,8 @@
+import 'package:clima/screens/error_page.dart';
 import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+// import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LocationScreen extends StatefulWidget {
   final weatherData;
@@ -21,8 +22,6 @@ class _LocationScreenState extends State<LocationScreen> {
   void initState() {
     super.initState();
     updateUI(widget.weatherData);
-    print(widget.weatherData);
-    // print(widget.weatherData);
   }
 
   void updateUI(dynamic data) {
@@ -36,22 +35,25 @@ class _LocationScreenState extends State<LocationScreen> {
         weatherMessage = weatherModel.getMessage(temperature);
       } catch (e) {
         if (data == 401 || data == null) {
-          temperature = 0;
-          weatherIcon = 'Error';
-          weatherMessage = 'Something';
-          cityName = ' ';
+          // temperature = 0;
+          // weatherIcon = 'Error';
+          // weatherMessage = 'Something';
+          // cityName = ' ';
+          // print('error');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ErrorPage()));
         }
       }
     });
   }
 
-  void alertMessage() {
-    Alert(
-      context: context,
-      title: 'ERROR!',
-      desc: 'NO CONNECTION',
-    ).show();
-  }
+  // void alertMessage() {
+  //   Alert(
+  //     context: context,
+  //     title: 'ERROR!',
+  //     desc: 'NO CONNECTION',
+  //   ).show();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +81,6 @@ class _LocationScreenState extends State<LocationScreen> {
                       var weatherLocationData =
                           await weatherModel.getWeatherLocation();
                       updateUI(weatherLocationData);
-                      if (widget.weatherData == null) {
-                        alertMessage();
-                      }
                     },
                     child: Icon(
                       Icons.near_me,
