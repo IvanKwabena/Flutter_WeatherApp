@@ -13,6 +13,8 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  String bgImage;
+  String weatherDescription;
   int temperature;
   String weatherMessage;
   String weatherIcon;
@@ -34,6 +36,8 @@ class _LocationScreenState extends State<LocationScreen> {
         weatherIcon = weatherModel.getWeatherIcon(condition);
         cityName = data['name'];
         weatherMessage = weatherModel.getMessage(temperature);
+        weatherDescription = data['weather'][0]['description'];
+        print(weatherDescription);
       } catch (e) {
         if (data == 401 || data == null) {
           // temperature = 0;
@@ -59,13 +63,33 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (weatherDescription == 'clear sky' ||
+        weatherDescription == 'few clouds') {
+      bgImage = 'images/sunny.jpg';
+    } else if (weatherDescription == 'scattered clouds' ||
+        weatherDescription == 'broken clouds') {
+      bgImage = 'images/cloudy.jpg';
+    } else if (weatherDescription == 'broken clouds' ||
+        weatherDescription == 'shower rain' ||
+        weatherDescription == 'light rain' ||
+        weatherDescription == 'thunderstorm') {
+      bgImage = 'images/rainy.jpg';
+    } else {
+      bgImage = 'images/night.jpeg';
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(''),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          splashRadius: 20.0,
+          padding: EdgeInsets.only(left: 20.0, top: 20.0),
+          onPressed: () async {
+            var weatherLocationData = await weatherModel.getWeatherLocation();
+            updateUI(weatherLocationData);
+          },
           icon: Icon(
             Icons.navigation_rounded,
             size: 40,
@@ -74,8 +98,21 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
         actions: [
           IconButton(
-              padding: EdgeInsets.only(right: 40.0),
-              onPressed: () {},
+              padding: EdgeInsets.only(right: 40.0, top: 20.0),
+              onPressed: () async {
+                // Receiving data backwards
+                var typedName = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CityScreen(),
+                  ),
+                );
+                if (typedName != null) {
+                  var weatherData =
+                      await weatherModel.getCityWeather(typedName);
+                  updateUI(weatherData);
+                }
+              },
               icon: Icon(
                 Icons.location_city,
                 color: Colors.white,
@@ -87,10 +124,10 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/location_background.jpg'),
+            image: AssetImage(bgImage),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.8), BlendMode.dstATop),
+                Colors.white.withOpacity(0.7), BlendMode.dstATop),
           ),
         ),
         constraints: BoxConstraints.expand(),
@@ -101,39 +138,7 @@ class _LocationScreenState extends State<LocationScreen> {
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () async {
-                      var weatherLocationData =
-                          await weatherModel.getWeatherLocation();
-                      updateUI(weatherLocationData);
-                    },
-                    child: Icon(
-                      Icons.near_me,
-                      size: 50.0,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Receiving data backwards
-                      var typedName = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CityScreen(),
-                        ),
-                      );
-                      if (typedName != null) {
-                        var weatherData =
-                            await weatherModel.getCityWeather(typedName);
-                        updateUI(weatherData);
-                      }
-                    },
-                    child: Icon(
-                      Icons.location_city,
-                      size: 50.0,
-                    ),
-                  ),
-                ],
+                children: [],
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15.0),
