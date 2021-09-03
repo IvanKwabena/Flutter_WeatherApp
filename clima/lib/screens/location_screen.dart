@@ -60,6 +60,30 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(''),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.navigation_rounded,
+            size: 40,
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          IconButton(
+              padding: EdgeInsets.only(right: 40.0),
+              onPressed: () {},
+              icon: Icon(
+                Icons.location_city,
+                color: Colors.white,
+                size: 40.0,
+              ))
+        ],
+      ),
+      extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
