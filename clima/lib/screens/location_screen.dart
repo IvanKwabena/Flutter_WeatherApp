@@ -60,25 +60,23 @@ class _LocationScreenState extends State<LocationScreen> {
   //     desc: 'NO CONNECTION',
   //   ).show();
   // }
+  //  (weatherDescription == 'broken clouds' ||
+  //     weatherDescription == 'shower rain' ||
+  //     weatherDescription == 'light rain' ||
+  //     weatherDescription == 'thunderstorm')
 
   @override
   Widget build(BuildContext context) {
-    bool isWord = false;
-    var check = weatherDescription.toLowerCase().contains('clouds');
+    var checkRain = weatherDescription.toLowerCase().contains('rain');
+    var checkClouds = weatherDescription.toLowerCase().contains('cloud');
+// var checkRain = weatherDescription.toLowerCase().contains('clouds');
 
-    if (weatherDescription == 'clear sky' ||
-        weatherDescription == 'few clouds') {
+    if (weatherDescription == 'clear sky') {
       bgImage = 'images/sunny.jpg';
-    } else if (weatherDescription == 'scattered clouds') {
-      bgImage = 'images/cloudy.jpg';
-    } else if (check == true)
-    //  (weatherDescription == 'broken clouds' ||
-    //     weatherDescription == 'shower rain' ||
-    //     weatherDescription == 'light rain' ||
-    //     weatherDescription == 'thunderstorm')
-
-    {
-      // isWord == true;
+    } else if (checkClouds == true) {
+      print(checkClouds);
+      bgImage = 'images/cloudy.jpeg';
+    } else if (checkRain == true) {
       bgImage = 'images/rainy.jpg';
     } else {
       bgImage = 'images/night.jpeg';
