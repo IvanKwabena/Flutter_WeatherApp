@@ -63,16 +63,22 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isWord = false;
+    var check = weatherDescription.toLowerCase().contains('clouds');
+
     if (weatherDescription == 'clear sky' ||
         weatherDescription == 'few clouds') {
       bgImage = 'images/sunny.jpg';
-    } else if (weatherDescription == 'scattered clouds' ||
-        weatherDescription == 'broken clouds') {
+    } else if (weatherDescription == 'scattered clouds') {
       bgImage = 'images/cloudy.jpg';
-    } else if (weatherDescription == 'broken clouds' ||
-        weatherDescription == 'shower rain' ||
-        weatherDescription == 'light rain' ||
-        weatherDescription == 'thunderstorm') {
+    } else if (check == true)
+    //  (weatherDescription == 'broken clouds' ||
+    //     weatherDescription == 'shower rain' ||
+    //     weatherDescription == 'light rain' ||
+    //     weatherDescription == 'thunderstorm')
+
+    {
+      // isWord == true;
       bgImage = 'images/rainy.jpg';
     } else {
       bgImage = 'images/night.jpeg';
