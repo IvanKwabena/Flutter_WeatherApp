@@ -1,4 +1,4 @@
-import 'package:clima/screens/location_screen.dart';
+// import 'package:clima/screens/location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 
@@ -9,6 +9,7 @@ class CityScreen extends StatefulWidget {
 
 class _CityScreenState extends State<CityScreen> {
   String cityName;
+  TextEditingController searchEditor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class _CityScreenState extends State<CityScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
@@ -37,16 +40,17 @@ class _CityScreenState extends State<CityScreen> {
               Container(
                 padding: EdgeInsets.all(20.0),
                 child: TextField(
+                  controller: searchEditor,
+                  autofocus: false,
                   cursorColor: Colors.white,
                   cursorHeight: 28.0,
                   enableSuggestions: true,
                   onChanged: (value) {
                     cityName = value;
-                    Navigator.pop(context, cityName);
                   },
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 25.0,
+                    fontSize: 20.0,
                   ),
                   enabled: true,
                   decoration: InputDecoration(
@@ -65,7 +69,10 @@ class _CityScreenState extends State<CityScreen> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context, cityName);
+                  searchEditor.clear();
+                },
                 child: Text(
                   'Get Weather',
                   style: kButtonTextStyle,
